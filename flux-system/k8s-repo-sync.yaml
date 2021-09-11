@@ -22,8 +22,8 @@ spec:
 #   name: k8s-repo-sync
 #   namespace: flux-system
 # spec:
-#   interval: 10m0s
-#   path: ./
+#   interval: 1m0s
+#   path: ./infra
 #   prune: true
 #   sourceRef:
 #     kind: GitRepository
@@ -37,11 +37,11 @@ metadata:
   name: system
   namespace: flux-system
 spec:
-  interval: 1m0s
+  interval: 10m0s
   sourceRef:
     kind: GitRepository
     name: k8s-repo-sync
-  path: ./infra/purelb/system
+  path: ./purelb/system
   prune: true
   validation: client
 
@@ -52,13 +52,13 @@ metadata:
   name: config
   namespace: flux-system
 spec:
-  interval: 1m0s
+  interval: 10m0s
   dependsOn:
     - name: system
   sourceRef:
     kind: GitRepository
     name: k8s-repo-sync
-  path: ./infra/purelb/config
+  path: ./purelb/config
   prune: true
   validation: client
   healthChecks:
