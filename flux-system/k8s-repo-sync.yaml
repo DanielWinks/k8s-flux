@@ -2,20 +2,20 @@
 apiVersion: source.toolkit.fluxcd.io/v1beta1
 kind: GitRepository
 metadata:
-  name: flux-system
+  name: k8s-repo-sync
   namespace: flux-system
 spec:
-  interval: 3m0s
+  interval: 1m0s
   ref:
     branch: main
   secretRef:
-    name: flux-system
-  url: ssh://git@github.com/DanielWinks/k8s-flux
+    name: k8s-repo-ssh-key
+  url: ssh://git@github.com/DanielWinks/k8s
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
 kind: Kustomization
 metadata:
-  name: flux-system
+  name: k8s-repo-sync
   namespace: flux-system
 spec:
   interval: 10m0s
@@ -23,5 +23,5 @@ spec:
   prune: true
   sourceRef:
     kind: GitRepository
-    name: flux-system
+    name: k8s-repo-sync
   validation: client
