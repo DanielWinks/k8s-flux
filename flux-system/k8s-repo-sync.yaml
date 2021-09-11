@@ -11,6 +11,8 @@ spec:
   secretRef:
     name: k8s-repo-ssh-key
   url: ssh://git@github.com/DanielWinks/k8s
+  ignore: |
+    ./infra/purelb
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
 kind: Kustomization
