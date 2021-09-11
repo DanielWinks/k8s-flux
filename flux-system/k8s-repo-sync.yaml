@@ -110,8 +110,8 @@ spec:
   retryInterval: 1m0s
   dependsOn:
     - name: purelb-system
-    - name: ingress-nginx
-    - name: external-dns
+    - name: ingress-nginx-sync
+    - name: external-dns-sync
   sourceRef:
     kind: GitRepository
     name: k8s-repo-sync
