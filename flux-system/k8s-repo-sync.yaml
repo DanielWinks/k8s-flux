@@ -86,7 +86,7 @@ spec:
   interval: 1m0s
   retryInterval: 1m0s
   dependsOn:
-    - name: system
+    - name: purelb-system
   sourceRef:
     kind: GitRepository
     name: k8s-repo-sync
