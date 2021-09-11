@@ -13,6 +13,7 @@ spec:
   url: ssh://git@github.com/DanielWinks/k8s
   ignore: |
     ./infra/purelb
+
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
 kind: Kustomization
@@ -27,3 +28,40 @@ spec:
     kind: GitRepository
     name: k8s-repo-sync
   validation: client
+
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+kind: Kustomization
+metadata:
+  name: system
+  namespace: flux-system
+spec:
+  interval: 1m0s
+  sourceRef:
+    kind: GitRepository
+    name: k8s-repo-sync
+  path: ./infra/purelb/system
+  prune: true
+  validation: client
+
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+kind: Kustomization
+metadata:
+  name: config
+  namespace: flux-system
+spec:
+  interval: 1m0s
+  dependsOn:
+    - name: system
+  sourceRef:
+    kind: GitRepository
+    name: k8s-repo-sync
+  path: ./infra/purelb/config
+  prune: true
+  validation: client
+  healthChecks:
+    - apiVersion: apps/v1
+      kind: DaemonSet
+      name: lbnodeagent
+      namespace: purelb
