@@ -14,20 +14,21 @@ spec:
   ignore: |
     ./infra/purelb
 
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
-kind: Kustomization
-metadata:
-  name: k8s-repo-sync
-  namespace: flux-system
-spec:
-  interval: 10m0s
-  path: ./
-  prune: true
-  sourceRef:
-    kind: GitRepository
-    name: k8s-repo-sync
-  validation: client
+
+# ---
+# apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+# kind: Kustomization
+# metadata:
+#   name: k8s-repo-sync
+#   namespace: flux-system
+# spec:
+#   interval: 10m0s
+#   path: ./
+#   prune: true
+#   sourceRef:
+#     kind: GitRepository
+#     name: k8s-repo-sync
+#   validation: client
 
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
