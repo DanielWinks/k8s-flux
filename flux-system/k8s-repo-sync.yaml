@@ -115,7 +115,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: k8s-repo-sync
-  path: ./purelb/config
+  path: ./oauth2-proxy
   prune: true
   validation: client
   healthChecks:
