@@ -192,6 +192,22 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
 kind: Kustomization
 metadata:
+  name: db-namespace
+  namespace: flux-system
+spec:
+  interval: 1m0s
+  retryInterval: 1m0s
+  path: ./db/namespace
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: k8s-repo-sync
+  validation: client
+
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+kind: Kustomization
+metadata:
   name: db-mariadb
   namespace: flux-system
 spec:
